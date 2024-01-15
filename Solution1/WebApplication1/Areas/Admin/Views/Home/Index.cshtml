@@ -31,7 +31,7 @@
 <body>
 
     <h1>News</h1>
-
+    <h3><a asp-action="Create">Create</a></h3>
     <table id="customers">
         <tr>
             <th>Id</th>
@@ -41,6 +41,9 @@
             <th>IsDelete</th>
             <th>Update</th>
             <th>Delete</th>
+            <th>SoftDelete</th>
+            <th>ReverseSoftDelete</th>
+
         </tr>
         @foreach(var item in Model)
         {
@@ -52,6 +55,8 @@
             <td>@item.IsDelete</td>
                 <td><a asp-action="Update" asp-route-id="@item.Id">Update</a></td>
                 <td><a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+                <td><a asp-action="SoftDelete" asp-route-id="@item.Id">SoftDelete</a></td>
+                <td><a asp-action="ReverseSoftDelete" asp-route-id="@item.Id">ReverseSoftDelete</a></td>
         </tr>
         }
     </table>

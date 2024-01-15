@@ -41,8 +41,9 @@ namespace WebApplication1.Areas.Admin.Controllers
                 Title = vm.Title,
                 ImagePath = vm.ImagePath,
                 Description = vm.Description,
-                IsDelete = false
-            });
+                IsDelete = false,
+                CreatedTime = DateTime.UtcNow
+            }) ;
             await _dBContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -71,11 +72,28 @@ namespace WebApplication1.Areas.Admin.Controllers
             await _dBContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             var data = await _dBContext.News.FindAsync(id);
             _dBContext.News.Remove(data);
+            _dBContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public async Task<IActionResult> SoftDelete(int id)
+        {
+            var data = await _dBContext.News.FindAsync(id);
+            data.IsDelete = true;
+            _dBContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpGet]
+        public async Task<IActionResult> ReverseSoftDelete(int id)
+        {
+            var data = await _dBContext.News.FindAsync(id);
+            data.IsDelete = false;
+            _dBContext.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
     }

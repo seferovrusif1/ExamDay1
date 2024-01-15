@@ -16,7 +16,7 @@ namespace WebApplication1.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List<NewsListItemVM> vmList = _dbContext.News.Where(x=>x.IsDelete==false).Take(3).Select(s=>new NewsListItemVM 
+            List<NewsListItemVM> vmList = _dbContext.News.Where(x=>x.IsDelete==false).OrderByDescending(d=>d.CreatedTime).Take(3).Select(s=>new NewsListItemVM 
             { 
                 Author=s.Author,
                 Description=s.Description,

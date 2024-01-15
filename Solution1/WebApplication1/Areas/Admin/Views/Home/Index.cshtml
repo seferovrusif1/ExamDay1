@@ -1,0 +1,62 @@
+﻿@using WebApplication1.Areas.Admin.ViewModels.NewsVMs;
+@model IEnumerable<NewsListItemVM>
+<style>
+        #customers {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            #customers td, #customers th {
+                border: 1px solid #ddd;
+                padding: 8px;
+            }
+
+            #customers tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            #customers tr:hover {
+                background-color: #ddd;
+            }
+
+            #customers th {
+                padding-top: 12px;
+                padding-bottom: 12px;
+                text-align: left;
+                background-color: #04AA6D;
+                color: white;
+            }
+    </style>
+<body>
+
+    <h1>News</h1>
+
+    <table id="customers">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ImagePath</th>
+            <th>IsDelete</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        @foreach(var item in Model)
+        {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Title</td>
+            <td>@item.Author</td>
+            <td>@item.ImagePath</td>
+            <td>@item.IsDelete</td>
+                <td><a asp-action="Update" asp-route-id="@item.Id">Update</a></td>
+                <td><a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+        </tr>
+        }
+    </table>
+
+</body>
+
+
+

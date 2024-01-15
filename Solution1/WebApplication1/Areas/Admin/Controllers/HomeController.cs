@@ -14,7 +14,8 @@ namespace WebApplication1.Areas.Admin.Controllers
         {
             _dBContext = dBContext;
         }
-        [HttpGet]
+       
+
         public async Task<IActionResult> Index()
         {
             List<NewsListItemVM> vmList = _dBContext.News.Select(s => new NewsListItemVM

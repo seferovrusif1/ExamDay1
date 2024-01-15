@@ -16,7 +16,11 @@ namespace WebApplication1
             builder.Services.AddDbContext<ExamDay1DBContext>(opt =>
             {
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL"));
-            }).AddIdentity<AppUser,IdentityRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ExamDay1DBContext>();
+            }).AddIdentity<AppUser, IdentityRole>(opt =>
+            {
+                opt.SignIn.RequireConfirmedEmail = false;
+                opt.Password.RequireNonAlphanumeric = false;
+            }).AddDefaultTokenProviders().AddEntityFrameworkStores<ExamDay1DBContext>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
